@@ -4,9 +4,9 @@ It loads configuration settings and initiates the document analysis process.
 """
 
 # Import configuration loading utility from utils.config module
-from utils.config import load_config
+from utils.azure_config import load_config
 # Import document analysis function from utils.analyzer module
-from utils.analyzer import analyze_document_read
+from utils.azure_analyzer import analyze_document_read
 
 def main():
     """
