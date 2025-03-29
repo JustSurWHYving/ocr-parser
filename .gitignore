@@ -1,6 +1,5 @@
 # Repo-specific files/folders
 images/*.txt
-wanderbase_docai.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
