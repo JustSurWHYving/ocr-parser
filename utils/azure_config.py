@@ -7,7 +7,7 @@ using a .env file. It handles the Azure Document Intelligence credentials and do
 import os
 from dotenv import load_dotenv
 
-def load_config():
+def load_config_azure():
     """Load configuration settings from environment variables.
     
     Loads the following settings from .env file:
