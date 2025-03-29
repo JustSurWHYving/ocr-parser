@@ -60,7 +60,7 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
             # Save the OCR result to a file if requested and we have a file_path
             if save_output and file_path:
                 # Create output filename with the same base name but .txt extension
-                output_path = os.path.splitext(file_path)[0] + "_ocr.txt"
+                output_path = os.path.splitext(file_path)[0] + "_ocr_di.txt"
                 with open(output_path, "w", encoding="utf-8") as output_file:
                     output_file.write(result.content)
                 print(f"OCR result saved to: {output_path}")    
