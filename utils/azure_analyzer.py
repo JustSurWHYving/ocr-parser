@@ -47,7 +47,7 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
 
     # Use the 'prebuilt-read' model for OCR
     poller = document_intelligence_client.begin_analyze_document(
-        "prebuilt-read", analyze_request=analyze_request, content_type="application/octet-stream" if file_path else None
+        model_id="prebuilt-read", body=analyze_request, content_type="application/octet-stream" if file_path else None
     )
 
     try:
