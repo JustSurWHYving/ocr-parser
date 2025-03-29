@@ -9,7 +9,6 @@ The module handles:
 - Document processing and analysis
 - User interaction for service selection
 """
-import os
 from utils.azure_config import load_config_azure
 from utils.azure_analyzer import analyze_document_read
 
@@ -45,4 +44,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
