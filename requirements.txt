@@ -1,3 +1,4 @@
 dotenv
 azure-ai-documentintelligence 
 azure-identity
+google-cloud-documentai
