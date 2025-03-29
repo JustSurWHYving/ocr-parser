@@ -13,7 +13,7 @@ import os
 from utils.azure_config import load_config_azure
 from utils.azure_analyzer import analyze_document_read
 
-def main(service):
+def main():
     """
     Main function that orchestrates the document analysis workflow.
     
@@ -44,10 +44,5 @@ def main(service):
     
 
 if __name__ == "__main__":
-    # Prompt user for service selection
-    print(f"Choose service to use for OCR:")
-    print("azure" + "/" + "google")
-    service = input("Enter the number of the service you want to use: ")
-
-    # Execute main function with selected service
-    main(service)
+    main()
+    
