@@ -1,47 +1,53 @@
 """
 This module serves as the main entry point for the document analysis application.
-It loads configuration settings and initiates the document analysis process.
-"""
+It provides functionality to analyze documents using either Azure's Computer Vision
+or Google Cloud Vision API services.
 
-# Import configuration loading utility from utils.config module
+The module handles:
+- Configuration loading for both services
+- File type validation
+- Document processing and analysis
+- User interaction for service selection
+"""
+import os
 from utils.azure_config import load_config_azure
-from utils.google_config import load_config_google
-# Import document analysis function from utils.analyzer module
 from utils.azure_analyzer import analyze_document_read
-from utils.google_analyzer import process_document_ocr
 
 def main(service):
     """
     Main function that orchestrates the document analysis workflow.
     
+    Args:
+        service (str): The service to use for document analysis.
+                      Valid values are 'azure' or 'google'.
+    
+    Returns:
+        None
+    
     The function performs the following steps:
     1. Loads configuration from environment variables
     2. Extracts necessary configuration values
-    3. Initiates document analysis
+    3. Initiates document analysis based on selected service
+    4. Handles document processing with appropriate parameters
     """
     
-    if service == "azure":
-        config = load_config_azure()
+    # Load Azure-specific configuration
+    config = load_config_azure()
 
-        # Extract required configuration values from the loaded config
-        endpoint = config["endpoint"]  # API endpoint for the analysis service
-        key = config["key"]           # Authentication key for the service
-        file_path = config["file_path"]  # Path to the document to be analyzed
-        
-        # Analyze the document using the provided configuration
-        result = analyze_document_read(endpoint, key, file_path=file_path, save_output=True) 
-
-    elif service == "google":
-        config = load_config_google()
-    else:
-        print("Invalid service selection. Please choose 'azure' or 'google'.")
-        return
+    # Extract required configuration values from the loaded config
+    endpoint = config["endpoint"]  # API endpoint for the analysis service
+    key = config["key"]           # Authentication key for the service
+    file_path = config["file_path"]  # Path to the document to be analyzed
+    
+    # Analyze the document using the provided configuration
+    result = analyze_document_read(endpoint, key, file_path=file_path, save_output=True) 
     
 
-
 if __name__ == "__main__":
+    # Prompt user for service selection
     print(f"Choose service to use for OCR:")
     print("azure" + "/" + "google")
     service = input("Enter the number of the service you want to use: ")
 
+    # Execute main function with selected service
     main(service)
