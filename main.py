@@ -40,7 +40,7 @@ def main(service):
     file_path = config["file_path"]  # Path to the document to be analyzed
     
     # Analyze the document using the provided configuration
-    result = analyze_document_read(endpoint, key, file_path=file_path, save_output=True) 
+    result = analyze_document_read(endpoint, key, file_path=file_path, save_output=False) 
     
 
 if __name__ == "__main__":
