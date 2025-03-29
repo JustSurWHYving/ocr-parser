@@ -52,7 +52,6 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
 
     try:
         result: AnalyzeResult = poller.result()  # Wait for analysis to complete
-
         print("OCR process complete.")
 
         if result.content:
