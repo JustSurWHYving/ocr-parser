@@ -2,6 +2,9 @@
 
 This module provides functionality to load configuration settings from environment variables
 using a .env file. It handles the Azure Document Intelligence credentials and document paths.
+
+Returns:
+    dict: A configuration dictionary.
 """
 
 import os
