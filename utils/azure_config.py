@@ -6,7 +6,6 @@ using a .env file. It handles the Azure Document Intelligence credentials and do
 Returns:
     dict: A configuration dictionary.
 """
-
 import os
 from dotenv import load_dotenv
 
