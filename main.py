@@ -9,8 +9,9 @@ The module handles:
 - Document processing and analysis
 - User interaction for service selection
 """
-from utils.azure_config import load_config_azure
+from utils.config import load_config
 from utils.azure_analyzer import analyze_document_read
+from utils.gemini_analyzer import gemini_markdown_save
 
 def main():
     """
@@ -31,16 +32,19 @@ def main():
     """
     
     # Load Azure-specific configuration
-    config = load_config_azure()
+    config = load_config()
 
     # Extract required configuration values from the loaded config
     endpoint = config["endpoint"]  # API endpoint for the analysis service
     key = config["key"]           # Authentication key for the service
     file_path = config["file_path"]  # Path to the document to be analyzed
-    
+
     # Analyze the document using the provided configuration
-    result = analyze_document_read(endpoint, key, file_path=file_path, save_output=False) 
+    result = analyze_document_read(endpoint, key, file_path=file_path, save_output=True)
     
+    # Convert the OCR result to Markdown
+    gemini_markdown_save(file_path=file_path)
+
 
 if __name__ == "__main__":
     main()
