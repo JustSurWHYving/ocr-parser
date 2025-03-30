@@ -29,7 +29,7 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
          print(f"Error: File not found at {file_path}")
          return
 
-    print(f"Analyzing document using model 'prebuilt-read'...")
+    print(f"Analyzing document using model 'prebuilt-layout'...")
 
     document_intelligence_client = DocumentIntelligenceClient(
         endpoint=endpoint, credential=AzureKeyCredential(key)
@@ -45,9 +45,9 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
     elif doc_url:
         analyze_request = AnalyzeDocumentRequest(url_source=doc_url)
 
-    # Use the 'prebuilt-read' model for OCR
+    # Use the 'prebuilt-layout' model for OCR
     poller = document_intelligence_client.begin_analyze_document(
-        model_id="prebuilt-read", body=analyze_request, content_type="application/octet-stream" if file_path else None
+        model_id="prebuilt-layout", body=analyze_request, content_type="application/octet-stream" if file_path else None
     )
 
     try:
@@ -55,7 +55,8 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
         print("OCR process complete.")
 
         if result.content:
-            print(f"Extracted Text (first 1000 chars):\n{result.content[:1000]}...")
+            # Print the first couple of words
+            # print(f"Extracted Text (first 1000 chars):\n{result.content[:1000]}...")
 
             # Save the OCR result to a file if requested and we have a file_path
             if save_output and file_path:
