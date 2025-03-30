@@ -27,6 +27,7 @@ def load_config():
     
     # Create config dictionary with required settings
     config = {
+        "root_path": os.getenv("ROOT_PATH"),
         "file_path": os.getenv("DOCUMENT_FILE_PATH"),
         "endpoint": os.getenv("AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT"),
         "key": os.getenv("AZURE_DOCUMENT_INTELLIGENCE_KEY"),
