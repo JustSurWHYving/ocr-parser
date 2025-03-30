@@ -15,9 +15,25 @@ Raises:
     Prints error messages for invalid input or analysis failures.
 """
 import os
+from utils.config import load_config
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
 from azure.ai.documentintelligence.models import AnalyzeResult, AnalyzeDocumentRequest
+
+config = load_config()
+root_path = config["root_path"]
+
+def azure_ocr_info(file_path: str):
+    # Create outputs/ocr directory if it doesn't exist
+    ocr_dir = os.path.join(root_path, "outputs", "ocr")
+    os.makedirs(ocr_dir, exist_ok=True)
+
+    # Get the base filename without extension
+    base_name = os.path.splitext(os.path.basename(file_path))[0]
+    # Create output filename with the same base name but .txt extension
+    ocr_path = os.path.join(ocr_dir, f"{base_name}.txt")
+
+    return base_name, ocr_path
 
 def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_url: str = None, save_output: bool = False):
     """Analyzes a document using the Document Intelligence 'Read' model."""
@@ -60,14 +76,14 @@ def analyze_document_read(endpoint: str, key: str, file_path: str = None, doc_ur
 
             # Save the OCR result to a file if requested and we have a file_path
             if save_output and file_path:
-                # Create output filename with the same base name but .txt extension
-                output_path = os.path.splitext(file_path)[0] + "_ocr_di.txt"
-                with open(output_path, "w", encoding="utf-8") as output_file:
+                _, ocr_path = azure_ocr_info(file_path)
+
+                with open(ocr_path, "w", encoding="utf-8") as output_file:
                     output_file.write(result.content)
-                print(f"OCR result saved to: {output_path}")    
+                print(f"OCR result saved to: {ocr_path}")
 
         else:
-            print("No text content found.")
+            print("No text content found in the document.")
 
         return result
 
