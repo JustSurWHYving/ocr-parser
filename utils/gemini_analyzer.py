@@ -8,14 +8,18 @@ and links while preserving the original document's structure.
 import os
 from google import genai
 from utils.config import load_config
+from utils.azure_analyzer import azure_ocr_info
 
 config = load_config()
 api_key = config["api_key"]
 
 client = genai.Client(api_key=api_key)
 
+root_path = config["root_path"] # Path to the root directory of the application
 file_path = config["file_path"]  # Path to the document to be analyzed
-ocr_path = file_path + "_ocr_di.txt" # Path to the OCR output of the document
+
+# Fetch the base name and ocr path from the azure_ocr_info function in azure_analyzer.py
+base_name, ocr_path = azure_ocr_info(file_path)
 
 prompt = f"""You are an expert in converting OCR text into well-structured Markdown documents.
 You will be provided with the OCR text extracted from an image or document.
@@ -74,12 +78,13 @@ def gemini_markdown():
 
 def gemini_markdown_save(file_path: str):
     response = gemini_markdown()
-
-    # Get the base filename without extension
-    base_name = os.path.splitext(os.path.basename(file_path))[0]
     
+    # Create outputs/markdown directory if it doesn't exist
+    markdown_dir = os.path.join(root_path, "outputs", "markdown")
+    os.makedirs(markdown_dir, exist_ok=True)    
+
     # Create markdown filename 
-    markdown_file = os.path.join(os.path.dirname(file_path), f"{base_name}.md")
+    markdown_file = os.path.join(markdown_dir, f"{base_name}.md")
     
     # Write response to markdown file
     with open(markdown_file, 'w') as f:
