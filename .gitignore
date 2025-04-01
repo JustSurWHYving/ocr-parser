@@ -1,4 +1,5 @@
 # Repo-specific files/folders
+.idea
 images/*.txt
 images/*.md
 outputs/
