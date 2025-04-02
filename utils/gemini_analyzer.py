@@ -79,8 +79,8 @@ def gemini_markdown():
 def gemini_markdown_save(file_path: str):
     response = gemini_markdown()
     
-    # Create outputs/markdown directory if it doesn't exist
-    markdown_dir = os.path.join(root_path, "outputs", "markdown")
+    # Create output/markdown directory if it doesn't exist
+    markdown_dir = os.path.join(root_path, "output", "markdown")
     os.makedirs(markdown_dir, exist_ok=True)    
 
     # Create markdown filename 

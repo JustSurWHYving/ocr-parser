@@ -24,8 +24,8 @@ config = load_config()
 root_path = config["root_path"]
 
 def azure_ocr_info(file_path: str):
-    # Create outputs/ocr directory if it doesn't exist
-    ocr_dir = os.path.join(root_path, "outputs", "ocr")
+    # Create output/ocr directory if it doesn't exist
+    ocr_dir = os.path.join(root_path, "output", "ocr")
     os.makedirs(ocr_dir, exist_ok=True)
 
     # Get the base filename without extension
