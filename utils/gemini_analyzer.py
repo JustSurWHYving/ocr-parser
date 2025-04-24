@@ -71,7 +71,7 @@ Now, only return all of the formatted Markdown output given in the OCR, Do not i
 
 def gemini_markdown():
     response = client.models.generate_content(
-        model = "gemini-1.5-pro", contents=prompt
+        model = "gemini-2.0-flash", contents=prompt
     )
 
     return response.text
