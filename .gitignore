@@ -1,7 +1,7 @@
 # Repo-specific files/folders
 .idea
-images/*.txt
-images/*.md
+docs/
+images/
 output/
 prompts/
 
